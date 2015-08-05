@@ -23,21 +23,21 @@ class ActorsController < ApplicationController
   end
 
   def edit_form
+    @director=Director.find(params[:id])
     @actor = Actor.find(params[:id])
   end
 
   def update_row
     @actor = Actor.find(params[:id])
-
-    @actor.dob = params[:dob]
-    @actor.name = params[:name]
-    @actor.bio = params[:bio]
-    @actor.image_url = params[:image_url]
-
-    @actor.save
-
-    render("show")
-  end
+    @director=Director.find(params[:id])
+    i = Director.find(@director)
+    i.name=params["the_name"]
+    i.bio=params["the_bio"]
+    i.dob=params["the_dob"]
+   i.image_url=params["the_image_url"]
+   i.save
+    redirect_to action:"show"
+end
 
   def destroy
     @actor = Actor.find(params[:id])
